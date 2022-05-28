@@ -4,9 +4,9 @@ import express from 'express'
 import fs from 'fs'
 
 var soapService = {
-    calculatorService: {
-        calculatorServiceSoapPort: {
-            Suma: (args) => {
+    calculatorService: { //Servicio
+        calculatorServiceSoapPort: { //portType
+            Suma: (args) => { //Definición de las operaciones
                 return {
                     result: args.intA + args.intB
                 }
@@ -33,11 +33,11 @@ var soapService = {
     }
 }
 
-var WSDL = fs.readFileSync('input.wsdl', 'utf-8')
+var WSDL = fs.readFileSync('input.wsdl', 'utf-8') //Lectura de la estructura del wsdl
 
 var app = express()
 
-app.listen(8000, ()=> {
+app.listen(8000, ()=> { //Inicializar el servidor
     soap.listen(app, '/calculator', soapService, WSDL)
 })
 
